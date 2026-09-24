@@ -279,7 +279,7 @@ st.markdown(
 
 .stLinkButton a p,
 .stLinkButton a span {
-    font-size: 75px !important;
+    font-size: 70px !important;
 }
 
 
