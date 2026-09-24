@@ -315,7 +315,9 @@ st.markdown(
 }
 
 .stLinkButton a p,
-.stLinkButton a span {
+.stLinkButton a span,
+.stButton button p,
+.stButton button span {
     font-size: 70px !important;
 }
 
@@ -474,16 +476,3 @@ else:
             unsafe_allow_html=True
         )
 
-# =========================
-# Thank you message
-# =========================
-
-if st.session_state.get("rating") in [1, 2, 3]:
-    st.markdown(
-        """
-        <div class="thank-you">
-            תודה על הדירוג! 🙏
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
