@@ -131,76 +131,94 @@ st.markdown(
     }
 
 
-    /* ---------- Columns ---------- */
+ /* ---------- Stars row ---------- */
 
-    [data-testid="stHorizontalBlock"] {
+/* מכריח את 5 העמודות להישאר בשורה אחת גם בטלפון */
+[data-testid="stHorizontalBlock"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
 
-        gap: 8px !important;
+    width: 100% !important;
 
-        align-items: center;
+    gap: 2px !important;
 
-        justify-content: center;
-    }
+    align-items: flex-start !important;
+    justify-content: center !important;
+}
 
-
-    /* ---------- Link buttons ---------- */
-
-    .stLinkButton {
-
-        display: flex;
-
-        justify-content: center;
-    }
-
-
-    .stLinkButton > a {
-
-        background: transparent !important;
-
-        border: none !important;
-
-        box-shadow: none !important;
-
-        padding: 0 !important;
-
-        min-height: auto !important;
-
-        height: auto !important;
-
-        width: 100% !important;
-
-        color: #fbbc04 !important;
-
-        font-size: 45px !important;
-
-        line-height: 1 !important;
-
-        text-decoration: none !important;
-
-        transition: transform 0.15s ease;
-    }
+/* כל עמודה תופסת בדיוק חמישית */
+[data-testid="stHorizontalBlock"] > div {
+    flex: 1 1 20% !important;
+    width: 20% !important;
+    min-width: 0 !important;
+}
 
 
-    .stLinkButton > a:hover {
+/* ---------- Star buttons ---------- */
 
-        background: transparent !important;
+.stLinkButton {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
 
-        border: none !important;
+.stLinkButton > a {
+    background: transparent !important;
 
-        color: #fbbc04 !important;
+    border: none !important;
+    box-shadow: none !important;
 
-        transform: scale(1.12);
-    }
+    padding: 0 !important;
+
+    width: 100% !important;
+    min-height: 70px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    color: #fbbc04 !important;
+
+    font-size: 58px !important;
+    line-height: 1 !important;
+
+    text-decoration: none !important;
+
+    transition: transform 0.15s ease;
+}
+
+.stLinkButton > a:hover {
+    background: transparent !important;
+    border: none !important;
+
+    color: #fbbc04 !important;
+
+    transform: scale(1.1);
+}
+
+.stLinkButton > a:focus,
+.stLinkButton > a:active,
+.stLinkButton > a:visited {
+    box-shadow: none !important;
+    color: #fbbc04 !important;
+}
 
 
-    .stLinkButton > a:focus {
+/* ---------- Rating numbers ---------- */
 
-        box-shadow: none !important;
+.rating-number {
+    text-align: center;
 
-        color: #fbbc04 !important;
-    }
+    color: #70757a;
 
+    font-family: Arial, Helvetica, sans-serif;
 
+    font-size: 19px;
+    font-weight: 600;
+
+    margin-top: -5px;
+}
     /* ---------- Mobile ---------- */
 
     @media (max-width: 600px) {
@@ -230,7 +248,7 @@ st.markdown(
 
         .stLinkButton > a {
 
-            font-size: 40px !important;
+            font-size: 52px !important;
         }
 
 
@@ -259,7 +277,7 @@ st.markdown(
 
         .stLinkButton > a {
 
-            font-size: 35px !important;
+            font-size: 45px !important;
         }
     }
 
@@ -307,28 +325,25 @@ st.markdown(
 # Stars
 # =========================
 
-col1, col2, col3, col4, col5 = st.columns(5)
+# הסדר על המסך:
+# 5  ★ ★ ★ ★ ★  1
+# כלומר 1 בצד ימין ו-5 בצד שמאל
 
-with col1:
+col5, col4, col3, col2, col1 = st.columns(5)
+
+
+with col5:
     st.link_button(
         "★",
         GOOGLE_REVIEW_URL,
         use_container_width=True
     )
 
-with col2:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
+    st.markdown(
+        '<div class="rating-number">5</div>',
+        unsafe_allow_html=True
     )
 
-with col3:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
-    )
 
 with col4:
     st.link_button(
@@ -337,9 +352,31 @@ with col4:
         use_container_width=True
     )
 
-with col5:
+
+with col3:
     st.link_button(
         "★",
         GOOGLE_REVIEW_URL,
         use_container_width=True
+    )
+
+
+with col2:
+    st.link_button(
+        "★",
+        GOOGLE_REVIEW_URL,
+        use_container_width=True
+    )
+
+
+with col1:
+    st.link_button(
+        "★",
+        GOOGLE_REVIEW_URL,
+        use_container_width=True
+    )
+
+    st.markdown(
+        '<div class="rating-number">1</div>',
+        unsafe_allow_html=True
     )
