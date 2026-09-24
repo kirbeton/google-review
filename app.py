@@ -157,14 +157,18 @@ st.markdown(
 
 /* ---------- Star buttons ---------- */
 
-.stLinkButton {
+/* גם link_button וגם button */
+.stLinkButton,
+.stButton {
     display: flex !important;
     justify-content: center !important;
     width: 100% !important;
 }
 
-/* הכפתור עצמו */
-.stLinkButton > a {
+
+/* הכפתורים עצמם */
+.stLinkButton > a,
+.stButton > button {
     background: transparent !important;
 
     border: none !important;
@@ -189,10 +193,11 @@ st.markdown(
 }
 
 
-/* ⭐ זה החלק שמגדיל את הכוכב עצמו ⭐ */
-
+/* הכוכב עצמו */
 .stLinkButton a p,
-.stLinkButton a span {
+.stLinkButton a span,
+.stButton button p,
+.stButton button span {
     font-size: 75px !important;
 
     line-height: 1 !important;
@@ -204,12 +209,13 @@ st.markdown(
 }
 
 
-/* מעבר עכבר */
-
-.stLinkButton > a:hover {
+/* Hover - זהה לכולם */
+.stLinkButton > a:hover,
+.stButton > button:hover {
     background: transparent !important;
 
     border: none !important;
+    box-shadow: none !important;
 
     color: #fbbc04 !important;
 
@@ -217,13 +223,28 @@ st.markdown(
 }
 
 
-/* שומר על הצבע */
-
+/* לחיצה / פוקוס */
 .stLinkButton > a:focus,
 .stLinkButton > a:active,
-.stLinkButton > a:visited {
+.stLinkButton > a:visited,
+.stButton > button:focus,
+.stButton > button:active {
+    background: transparent !important;
+
+    border: none !important;
     box-shadow: none !important;
 
+    color: #fbbc04 !important;
+}
+
+
+/* מונע מ-Streamlit לשנות את צבע הכוכב */
+.stButton > button:hover p,
+.stButton > button:hover span,
+.stButton > button:focus p,
+.stButton > button:focus span,
+.stButton > button:active p,
+.stButton > button:active span {
     color: #fbbc04 !important;
 }
 
@@ -243,6 +264,22 @@ st.markdown(
     line-height: 1;
 
     margin-top: 8px;
+}
+
+/* ---------- Thank you message ---------- */
+
+.thank-you {
+    text-align: center;
+    direction: rtl;
+
+    color: #202124;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    margin-top: 35px;
 }
 
     /* ---------- Mobile ---------- */
@@ -353,61 +390,100 @@ st.markdown(
 
 
 # =========================
-# Stars
+# Stars / Thank you
 # =========================
 
-# הסדר על המסך:
-# 5  ★ ★ ★ ★ ★  1
-# כלומר 1 בצד ימין ו-5 בצד שמאל
-
-col5, col4, col3, col2, col1 = st.columns(5)
-
-
-with col5:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
-    )
+# אם כבר נבחר דירוג של 1-3,
+# מסתירים את הכוכבים ומציגים תודה
+if st.session_state.get("rating") in [1, 2, 3]:
 
     st.markdown(
-        '<div class="rating-number">5</div>',
+        """
+        <div class="thank-you">
+            🙏 תודה על הדירוג!
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
+else:
 
-with col4:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
-    )
+    # הסדר על המסך:
+    # 5  ★ ★ ★ ★ ★  1
 
-
-with col3:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
-    )
+    col5, col4, col3, col2, col1 = st.columns(5)
 
 
-with col2:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
-    )
+    # ⭐ 5 - פותח Google
+    with col5:
+        st.link_button(
+            "★",
+            GOOGLE_REVIEW_URL,
+            use_container_width=True
+        )
+
+        st.markdown(
+            '<div class="rating-number">5</div>',
+            unsafe_allow_html=True
+        )
 
 
-with col1:
-    st.link_button(
-        "★",
-        GOOGLE_REVIEW_URL,
-        use_container_width=True
-    )
+    # ⭐ 4 - פותח Google
+    with col4:
+        st.link_button(
+            "★",
+            GOOGLE_REVIEW_URL,
+            use_container_width=True
+        )
 
+
+    # ⭐ 3 - נשאר באתר
+    with col3:
+        if st.button(
+            "★",
+            key="rating_3",
+            use_container_width=True
+        ):
+            st.session_state["rating"] = 3
+            st.rerun()
+
+
+    # ⭐ 2 - נשאר באתר
+    with col2:
+        if st.button(
+            "★",
+            key="rating_2",
+            use_container_width=True
+        ):
+            st.session_state["rating"] = 2
+            st.rerun()
+
+
+    # ⭐ 1 - נשאר באתר
+    with col1:
+        if st.button(
+            "★",
+            key="rating_1",
+            use_container_width=True
+        ):
+            st.session_state["rating"] = 1
+            st.rerun()
+
+        st.markdown(
+            '<div class="rating-number">1</div>',
+            unsafe_allow_html=True
+        )
+
+# =========================
+# Thank you message
+# =========================
+
+if st.session_state.get("rating") in [1, 2, 3]:
     st.markdown(
-        '<div class="rating-number">1</div>',
+        """
+        <div class="thank-you">
+            תודה על הדירוג! 🙏
+        </div>
+        """,
         unsafe_allow_html=True
     )
