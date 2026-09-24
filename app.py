@@ -131,9 +131,9 @@ st.markdown(
     }
 
 
- /* ---------- Stars row ---------- */
+/* ---------- Stars row ---------- */
 
-/* מכריח את 5 העמודות להישאר בשורה אחת גם בטלפון */
+/* שומר על כל 5 הכוכבים בשורה אחת */
 [data-testid="stHorizontalBlock"] {
     display: flex !important;
     flex-direction: row !important;
@@ -147,7 +147,7 @@ st.markdown(
     justify-content: center !important;
 }
 
-/* כל עמודה תופסת בדיוק חמישית */
+/* כל כוכב מקבל חמישית מהשורה */
 [data-testid="stHorizontalBlock"] > div {
     flex: 1 1 20% !important;
     width: 20% !important;
@@ -163,6 +163,7 @@ st.markdown(
     width: 100% !important;
 }
 
+/* הכפתור עצמו */
 .stLinkButton > a {
     background: transparent !important;
 
@@ -172,7 +173,9 @@ st.markdown(
     padding: 0 !important;
 
     width: 100% !important;
-    min-height: 70px !important;
+
+    min-height: 95px !important;
+    height: 95px !important;
 
     display: flex !important;
     align-items: center !important;
@@ -180,27 +183,47 @@ st.markdown(
 
     color: #fbbc04 !important;
 
-    font-size: 58px !important;
-    line-height: 1 !important;
-
     text-decoration: none !important;
 
     transition: transform 0.15s ease;
 }
 
+
+/* ⭐ זה החלק שמגדיל את הכוכב עצמו ⭐ */
+
+.stLinkButton a p,
+.stLinkButton a span {
+    font-size: 75px !important;
+
+    line-height: 1 !important;
+
+    color: #fbbc04 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* מעבר עכבר */
+
 .stLinkButton > a:hover {
     background: transparent !important;
+
     border: none !important;
 
     color: #fbbc04 !important;
 
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
+
+
+/* שומר על הצבע */
 
 .stLinkButton > a:focus,
 .stLinkButton > a:active,
 .stLinkButton > a:visited {
     box-shadow: none !important;
+
     color: #fbbc04 !important;
 }
 
@@ -210,15 +233,18 @@ st.markdown(
 .rating-number {
     text-align: center;
 
-    color: #70757a;
+    color: #4a4a4a;
 
     font-family: Arial, Helvetica, sans-serif;
 
-    font-size: 19px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
 
-    margin-top: -5px;
+    line-height: 1;
+
+    margin-top: 8px;
 }
+
     /* ---------- Mobile ---------- */
 
     @media (max-width: 600px) {
@@ -247,9 +273,14 @@ st.markdown(
 
 
         .stLinkButton > a {
+    min-height: 95px !important;
+    height: 95px !important;
+}
 
-            font-size: 100px !important;
-        }
+.stLinkButton a p,
+.stLinkButton a span {
+    font-size: 75px !important;
+}
 
 
         [data-testid="stHorizontalBlock"] {
