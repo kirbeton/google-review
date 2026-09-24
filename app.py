@@ -248,7 +248,7 @@ st.markdown(
 
         .stLinkButton > a {
 
-            font-size: 52px !important;
+            font-size: 100px !important;
         }
 
 
@@ -277,7 +277,7 @@ st.markdown(
 
         .stLinkButton > a {
 
-            font-size: 45px !important;
+            font-size: 100px !important;
         }
     }
 
