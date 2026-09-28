@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>דרגו אותנו בגוגל</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            background: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100dvh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+
+            padding-top: 12vh;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 30px;
+        }
+
+        .google-logo {
+            display: block;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #202124;
+
+            font-size: 32px;
+            font-weight: 700;
+
+            margin-top: 5px;
+            margin-bottom: 8px;
+
+            direction: rtl;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #70757a;
+
+            font-size: 17px;
+
+            margin-bottom: 30px;
+
+            direction: rtl;
+        }
+
+        .stars-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+
+            width: 100%;
+            gap: 2px;
+
+            direction: ltr;
+        }
+
+        .rating-item {
+            min-width: 0;
+            text-align: center;
+        }
+
+        .star {
+            appearance: none;
+            -webkit-appearance: none;
+
+            width: 100%;
+            height: 95px;
+            min-height: 95px;
+
+            padding: 0;
+            margin: 0;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: #fbbc04;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(54px, 13vw, 75px);
+            line-height: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            transition: transform 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .star:hover {
+            transform: scale(1.08);
+        }
+
+        .star:active {
+            transform: scale(0.98);
+        }
+
+        .rating-number {
+            text-align: center;
+
+            color: #4a4a4a;
+
+            font-size: 28px;
+            font-weight: 700;
+
+            line-height: 1;
+
+            margin-top: 8px;
+        }
+
+        .thank-you {
+            display: none;
+
+            text-align: center;
+            direction: rtl;
+
+            color: #202124;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            margin-top: 35px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding-top: 15vh;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .title {
+                font-size: 27px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+
+            .star {
+                font-size: clamp(54px, 18vw, 70px);
+            }
+        }
+
+        @media (max-width: 360px) {
+            .title {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <img
+        class="google-logo"
+        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+        alt="Google"
+    >
+
+    <div class="title">
+        דרגו אותנו בגוגל
+    </div>
+
+    <div class="subtitle">
+        לחצו על כוכב כדי לדרג אותנו
+    </div>
+
+
+    <div id="ratingArea">
+
+        <div class="stars-row">
+
+            <div class="rating-item">
+                <button class="star" onclick="selectRating(5)">★</button>
+                <div class="rating-number">5</div>
+            </div>
+
+            <div class="rating-item">
+                <button class="star" onclick="selectRating(4)">★</button>
+            </div>
+
+            <div class="rating-item">
+                <button class="star" onclick="selectRating(3)">★</button>
+            </div>
+
+            <div class="rating-item">
+                <button class="star" onclick="selectRating(2)">★</button>
+            </div>
+
+            <div class="rating-item">
+                <button class="star" onclick="selectRating(1)">★</button>
+                <div class="rating-number">1</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="thankYou" class="thank-you">
+        🙏 תודה על הדירוג!
+    </div>
+
+</div>
+
+
+<script>
+
+const GOOGLE_REVIEW_URL = "https://www.google.com/search?q=%D7%A4%D7%99%D7%A6%D7%94+%D7%A9%D7%99%D7%A8%D7%95%D7%A7%D7%95&sca_esv=8b590ccd188bc65d&sxsrf=APpeQntiHbWoQB6zq7r4bihYhZ1huOydeQ%3A1790184622842&ei=rgy0auvwMuzYhbIP0JS70QI&biw=1920&bih=912&oq=%D7%A4%D7%99%D7%A6%D7%94+%D7%A9%D7%99%D7%A8&gs_lp=Egxnd3Mtd2l6LXNlcnAiD9ek15nXpteUINep15nXqCoFCAIYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABDIFEAAYgAQyBRAAGIAESKmJAVDqAljnenADeAGQAQCYAd0BoAHyB6oBBTAuNC4yuAEByAEA-AEBmAIJoAKlCMICChAAGEcY1gQYsAPCAg0QABiABBiKBRhDGLADwgIXEC4Y3AYYuAYY2gYY2AIYyAMYsAPYAQHCAggQABiABBjLAcICEBAuGIAEGIoFGEMYxwEY0QPCAgoQABiABBiKBRhDwgIFEC4YgATCAgYQABgWGB7CAggQABgWGB4YCsICBxAAGIAEGA3CAgcQLhiABBgNwgIGEAAYHhgNmAMAiAYBkAYRugYGCAEQARgZkgcFMy40LjKgB5MzsgcFMC40LjK4B5AIwgcHMC4yLjYuMcgHJoAIAQ&sclient=gws-wiz-serp#sv=CAESzQEKuQEStgEKd0FKaVQ0dElnSF9fWlR5NWt4QW15V2RBeC04RkZaTUxVbVpESUY0NWxNZ2RfMUVCN0hXMF9kUHVJZkNnckRiRDRyaC1POEl1eWg0Q3dCeF9pQ1RCWEhVb3ZQY1RDZVB3OXZUZlI2ZGg3Q1kybzFXMndFVEtxdHk4Ehc1d3kwYXYteUR0T09oYklQNGRxSWdBbxoiQURzcjlmU1poVUVmTGRXUVJkM3NwMzhKUjljSGNQUG9ZQRIEODA1MRoBMyoAMAA4AUAAGAAgx5XC8Qk6AEoCEAE";
+
+
+function selectRating(rating) {
+
+    if (rating >= 4) {
+
+        window.location.href = GOOGLE_REVIEW_URL;
+
+        return;
+    }
+
+
+    document.getElementById("ratingArea").style.display = "none";
+
+    document.getElementById("thankYou").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
