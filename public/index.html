@@ -173,13 +173,28 @@
 </div>
 
 <script>
-    const GOOGLE_REVIEW_URL =
-        "https://www.google.com/search?q=%D7%A4%D7%99%D7%A6%D7%94+%D7%A9%D7%99%D7%A8%D7%95%D7%A7%D7%95";
+    const BUSINESSES = {
+        shiroko: {
+            googleUrl: "https://www.google.com/search?q=%D7%A4%D7%99%D7%A6%D7%94+%D7%A9%D7%99%D7%A8%D7%95%D7%A7%D7%95&oq=&gs_lcrp=EgZjaHJvbWUqCQgBECMYJxjqAjIJCAAQIxgnGOoCMgkIARAjGCcY6gIyCQgCECMYJxjqAjIJCAMQIxgnGOoCMgkIBBAjGCcY6gIyCQgFECMYJxjqAjIJCAYQIxgnGOoCMgkIBxAjGCcY6gLSAQkxODI5ajBqMTWoAgiwAgHxBaxu4L0x9u4D&sourceid=chrome&source=chrome.rb&ie=UTF-8#sv=CAESzQEKuQEStgEKd0FKaVQ0dEwtckx4OEJ6dTh4enFrR3FUYTlfbGo3RlJPcnZxUVM5SFQ4aFBaRXhPbG5iclAzUWFHUWNWZWNERzZkN253SnZKZUFhRXFtMTNSLUNhWVkzX29mVzZjTTRDT2U2TmQ3SzVGWVRVc2hHRkZCVEpjRExFEhctTHk3YXR5M01aR2toYklQZ01lR21BcxoiQURzcjlmUXVCNllLNU5wbnFwWEdlQ0ZIeGFaOGNUZWxwURIEODA1MRoBMyoAMAA4AUAAGAAgjKLv7wtKAhAB"
+        },
+
+        restaurant2: {
+            googleUrl: "https://www.google.com/search?q=%D7%A8%D7%93+%D7%9E%D7%99%D7%98&sca_esv=a41c0e78e49a8097&sxsrf=APpeQns1Uf2vOr1TqjJ5CrE8mqKysT-9AQ%3A1790688497170&ei=8by7ari1CfyMxc8P4sHbwAY&biw=1920&bih=912&uact=5&oq=%D7%A8%D7%93+%D7%9E%D7%99%D7%98&gs_lp=Egxnd3Mtd2l6LXNlcnAiC9eo15Mg157XmdeYMgoQABiABBiKBRhDMgoQABiABBiKBRhDMgUQABiABDITEC4YgAQYigUYQxjHARivARiOBTIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABDILEC4YgAQYxwEYrwEyCxAuGIAEGMcBGK8BMgUQABiABEipcVAAWNxucAd4AZABAJgBmQagAYklqgELMi02LjIuMS4xLjK4AQPIAQD4AQGYAhOgArAnqAIRwgIEECMYJ8ICExAuGIAEGIoFGEMYsQMYxwEY0QPCAg0QLhiABBiKBRhDGLEDwgIOEAAYgAQYigUYsQMYgwHCAgcQIxjqAhgnwgIWEAAYgAQYigUYQxjnBhjqAhi0AtgBAcICEBAAGAMYjwEY6gIYtALYAQHCAhAQLhgDGI8BGOoCGLQC2AEBwgINECMYogcYngYY8AUYJ8ICDhAuGIAEGIoFGLEDGIMBwgIIEAAYgAQYsQPCAgsQLhiABBixAxiDAcICDhAuGIAEGLEDGMcBGNEDwgIQEC4YgAQYigUYQxixAxiDAcICDhAuGIAEGLEDGMcBGK8BwgIOEAAYgAQYigUYjQYYsQPCAh8QLhiABBiKBRhDGLEDGIMBGJcFGNwEGN4EGN8E2AEBwgIdEC4YgAQYsQMYxwEY0QMYlwUY3AQY3gQY4ATYAQHCAgsQABiABBixAxiDAcICCxAuGIAEGMcBGNEDwgIQEC4YgAQYigUYQxjHARivAcICBRAuGIAEwgIGEAAYFhgemAMN8QXan0P5ObglbboGBggBEAEYAZIHDTcuMC41LjIuMy4xLjGgB5WwAbIHCzItNS4yLjMuMS4xuAfZJsIHCDItOC4xMC4xyAe0AYAIAQ&sclient=gws-wiz-serp#sv=CAESzQEKuQEStgEKd0FKaVQ0dEo0Njd6enRTTUpvMHRnZ3llM0dqZHZ0MUhQZEg3aWhveXV4bV9pM1hRc2dtc01wd09KWkdldUliNzNlQ1Zocy1xdFJfNmpoaGR2aTdqMi1xU2o1YVByeldCMG1mZE5SVEpUcnpKS0h3Yk5BejR6S1cwEhdMYjI3YXJXdURZT2toYklQdG9QbW1RMBoiQURzcjlmUzBYVml6S0FPZG12dlRuN0RSWGt4OVpDY1dHQRIEODA1MRoBMyoAMAA4AUAAGAAgi5XgoA1KAhAB"
+        }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const businessId = params.get("business");
+    const business = BUSINESSES[businessId];
 
     function rate(rating) {
+        if (!business) {
+            alert("העסק לא נמצא");
+            return;
+        }
 
         if (rating >= 4) {
-            window.location.assign(GOOGLE_REVIEW_URL);
+            window.location.assign(business.googleUrl);
             return;
         }
 
