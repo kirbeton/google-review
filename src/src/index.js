@@ -1,8 +1,0 @@
-export default {
-  async fetch() {
-    return Response.redirect(
-      "https://www.google.com/search?client=safari&hs=Bp3V&sca_esv=f74a3a3c47be0d30&hl=he-il&sxsrf=APpeQnt5XXA1ieMjbyUzw9TxyOx6TIqLpA:1790763851171&q=%D7%91%D7%99%D7%A7%D7%95%D7%A8%D7%95%D7%AA+%D7%A2%D7%9C+%D7%90%D7%95%D7%9E%D7%A0%D7%95%D7%AA+%D7%94%D7%A9%D7%99%D7%A2%D7%A8&uds=AJ5uw18bfgRWiwhsC5Fh0AYRcvLuCN2S3OGf8dcO27M43OvARdWrVCEtryLc9GmZylrzgPEye9RKfZj8dGUD0mlffAbl7U4-x-hFNrIXg8C8AvOyiKm28j4EnpDPd1KFaz3IDY9HThzX0CEQcunRpmB6Aq4p3qgpH9h_7070fkjh8LxRNTODCsFFNeX1DuZYlk305E04TAKfnr-vrY7RXMDDi5I8IOL4ujZRLQCPA7dXAxuwEvIJpiLUTTOWTcHjRwaqTPulhmvFvz5rNR3Z-q-nNDkuwIVnt4nc_nPGaksxkXuSUXTl8j8TFJn-77y_2Y8i2fZFjKxosd5RDyfZ3t1_LVz2Cj5DxV2QEMZv9wUR9pLAFyvOBgxLAlpo1tXednmZ9tf3dH_lghiI8Y3tgcx5n-VDFvm7IhX-cCxfXgADa3v2z6x18ccVHcEQOzDM7pfDboJEAmeFXDsNpukup4AKnjHQU81BCfnHCijU2us4GL3gjZ1KBs2sncTWJWBdD-SYnA3tjQ1qh5W4am-ynDb6s4RhAwQzrg&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_zlN7Ju5EFGBKAjBXJ1u8nLWO3HAL1Aw50rYiQOjQKE4BT7eXfdH97VRvv-zICZYGP2H4e8wVih8sKIHjCJirSXQPrcBLqEO8eEP8ZZBZip8kppOT1TR1vobJe2396sINGdia8o%3D&sa=X&ved=2ahUKEwiCu-aZi5aXAxUTQvEDHYLSHloQk8gLegQIHhAB&ictx=1&biw=393&bih=695&dpr=3&iga=1&utm_campaign=safari_share_1",
-      302
-    );
-  },
-};
